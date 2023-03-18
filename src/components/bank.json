@@ -1,0 +1,136 @@
+{
+  "version": "0.1.0",
+  "name": "bank",
+  "instructions": [
+    {
+      "name": "create",
+      "accounts": [
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "bank",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "deposit",
+      "accounts": [
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "bank",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "withdraw",
+      "accounts": [
+        {
+          "name": "user",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "bank",
+          "isMut": true,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Bank",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "balance",
+            "type": "u64"
+          },
+          {
+            "name": "owner",
+            "type": "publicKey"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "EmptyName",
+      "msg": "Bank name can not be empty string"
+    },
+    {
+      "code": 6001,
+      "name": "NameTooLong",
+      "msg": "Bank name can be atmost 20 bytes long"
+    },
+    {
+      "code": 6002,
+      "name": "ZeroAmount",
+      "msg": "The deposit/withdraw amount can not be zero"
+    },
+    {
+      "code": 6003,
+      "name": "InsufficientFunds",
+      "msg": "User does not have enough funds to deposit"
+    },
+    {
+      "code": 6004,
+      "name": "Unauthorized",
+      "msg": "Only bank's owner can withdraw funds"
+    },
+    {
+      "code": 6005,
+      "name": "InsufficientBankBalance",
+      "msg": "Bank balance is lower than withdraw amount requested"
+    }
+  ],
+  "metadata": {
+    "address": "3Fnff21ctkFSJvpAzrTeGMs1sscYKcHytB3f873NPAXY"
+  }
+}
